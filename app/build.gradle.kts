@@ -1,5 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -30,6 +32,11 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+        }
+    }
 
     buildFeatures {
         viewBinding = true
@@ -38,11 +45,13 @@ android {
 
 dependencies {
     implementation("androidx.room:room-runtime:2.7.1")
-    annotationProcessor("androidx.room:room-compiler:2.7.1")
+    implementation(libs.core.ktx)
+    ksp("androidx.room:room-compiler:2.7.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.9.0")
     implementation("androidx.lifecycle:lifecycle-livedata:2.9.0")
     implementation("androidx.fragment:fragment:1.8.8")
     implementation("androidx.core:core:1.16.0")
+    implementation(libs.core.ktx)
     implementation("androidx.core:core-splashscreen:1.0.1")
     implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     implementation(libs.appcompat)
