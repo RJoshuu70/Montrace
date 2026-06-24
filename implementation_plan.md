@@ -28,10 +28,11 @@ Kita akan menggunakan **Android Room (SQLite)** untuk database lokal dan menamba
 
 Proyek ini dibagi menjadi 5 tugas utama agar bisa dikerjakan secara paralel oleh setiap anggota kelompok:
 
-1. **Torikh Abdullah Naser** 👨‍💻 *(Sedang Dikerjakan)*
+1. **Torikh Abdullah Naser** 👨‍💻 *(Selesai)*
    - **Tugas:** Setup Room Database & DAO (Fase 1).
-   - **Fokus:** Membuat tabel `users` & `transactions`, menyiapkan `UserDao` & `TransactionDao`, serta inisialisasi `AppDatabase`.
-2. **Rapolo Joshua Napitupulu**
+   - *Fokus:* Membuat fondasi database agar bisa dipakai oleh anggota lain.
+
+2. **Rapolo Joshua** 🔐 *(Sedang Dikerjakan)*
    - **Tugas:** Implementasi Authentication Screen (Fase 2).
    - **Fokus:** Desain XML Sign Up & Log In, logika autentikasi, dan *Session Management* (SharedPreferences).
 3. **Rafi Fauzi Alfariz**

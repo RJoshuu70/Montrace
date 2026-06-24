@@ -45,10 +45,12 @@ android {
 
 dependencies {
     implementation("androidx.room:room-runtime:2.7.1")
+    implementation("androidx.room:room-ktx:2.7.1")
     implementation(libs.core.ktx)
     ksp("androidx.room:room-compiler:2.7.1")
     implementation("androidx.lifecycle:lifecycle-viewmodel:2.9.0")
     implementation("androidx.lifecycle:lifecycle-livedata:2.9.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.9.0")
     implementation("androidx.fragment:fragment:1.8.8")
     implementation("androidx.core:core:1.16.0")
     implementation(libs.core.ktx)
