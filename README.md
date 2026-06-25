@@ -24,7 +24,7 @@ MONTRACE is a premium finance tracking application designed to help users manage
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/RJoshuu70/UTSAD.git
+   git clone https://github.com/RJoshuu70/Montrace.git
    ```
 2. Open the project in **Android Studio**.
 3. Sync Project with Gradle Files.
