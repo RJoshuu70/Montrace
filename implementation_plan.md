@@ -37,7 +37,7 @@ Proyek ini dibagi menjadi 5 tugas utama agar bisa dikerjakan secara paralel oleh
    - **Fokus:** Desain XML Sign Up & Log In, logika autentikasi, dan *Session Management* (SharedPreferences).
 3. **Rafi Fauzi Alfariz**
    - **Tugas:** Update Home Screen (Fase 3).
-   - **Fokus:** *Header* dinamis, *Toggle* Income/Expense, *BottomSheet* Kategori, Form Input, dan List *Recent Transaction*.
+   - **Fokus:** *Header* dinamis, *Toggle* Income/Expense, *Popup* Kategori, Form Input, dan List *Recent Transaction*.
 4. **Fani Dwi Ariyanti**
    - **Tugas:** Update Transaction & Detail Screen (Fase 4).
    - **Fokus:** Menampilkan semua transaksi yang dikelompokkan per tanggal, menu Edit & Delete.
