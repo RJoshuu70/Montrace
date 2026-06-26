@@ -67,6 +67,11 @@ class HomeFragment : Fragment() {
         tvTotalAmount = view.findViewById(R.id.tv_total_amount)
         rvRecentTransactions = view.findViewById(R.id.rv_recent_transactions)
 
+        val tvViewAll = view.findViewById<TextView>(R.id.tv_view_all)
+        tvViewAll.setOnClickListener {
+            (activity as? MainActivity)?.navigateToTransaction()
+        }
+
         database = AppDatabase.getDatabase(requireContext())
 
         setupHeader()
@@ -132,7 +137,24 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        transactionAdapter = TransactionAdapter()
+        transactionAdapter = TransactionAdapter(
+            onEditClick = { transaction ->
+                (activity as? MainActivity)?.editTransaction(transaction)
+            },
+            onDeleteClick = { transaction ->
+                androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                    .setTitle("Delete Transaction")
+                    .setMessage("Are you sure you want to delete this transaction?")
+                    .setPositiveButton("Delete") { _, _ ->
+                        lifecycleScope.launch {
+                            database.transactionDao().deleteTransaction(transaction)
+                            android.widget.Toast.makeText(requireContext(), "Transaction Deleted", android.widget.Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            }
+        )
         rvRecentTransactions.layoutManager = LinearLayoutManager(requireContext())
         rvRecentTransactions.adapter = transactionAdapter
     }
@@ -156,26 +178,77 @@ class HomeFragment : Fragment() {
 
             val type = if (isExpensesActive) "EXPENSE" else "INCOME"
             
-            val transaction = Transaction(
-                user_id = currentUserId,
-                type = type,
-                category = category,
-                amount = amount,
-                source = source,
-                date = System.currentTimeMillis()
-            )
+            if (editingTransaction != null) {
+                // Update data
+                val updatedTransaction = editingTransaction!!.copy(
+                    type = type,
+                    category = category,
+                    amount = amount,
+                    source = source
+                )
+                lifecycleScope.launch(Dispatchers.IO) {
+                    database.transactionDao().updateTransaction(updatedTransaction)
+                    withContext(Dispatchers.Main) {
+                        resetInputFields()
+                        Toast.makeText(requireContext(), "Transaction Updated!", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } else {
+                // Insert new data
+                val transaction = Transaction(
+                    user_id = currentUserId,
+                    type = type,
+                    category = category,
+                    amount = amount,
+                    source = source,
+                    date = System.currentTimeMillis()
+                )
 
-            lifecycleScope.launch(Dispatchers.IO) {
-                database.transactionDao().insertTransaction(transaction)
-                withContext(Dispatchers.Main) {
-                    // Reset fields
-                    tvCategoryHint.text = "Category"
-                    tvCategoryHint.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_hint))
-                    etAmount.text.clear()
-                    etSource.text.clear()
-                    Toast.makeText(requireContext(), "Transaction Saved!", Toast.LENGTH_SHORT).show()
+                lifecycleScope.launch(Dispatchers.IO) {
+                    database.transactionDao().insertTransaction(transaction)
+                    withContext(Dispatchers.Main) {
+                        resetInputFields()
+                        Toast.makeText(requireContext(), "Transaction Saved!", Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
+        }
+    }
+
+    private fun resetInputFields() {
+        editingTransaction = null
+        tvCategoryHint.text = "Category"
+        tvCategoryHint.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_hint))
+        etAmount.text.clear()
+        etSource.text.clear()
+        btnSaveHome.text = "Save"
+    }
+
+    private var editingTransaction: Transaction? = null
+
+    fun setEditTransaction(transaction: Transaction) {
+        editingTransaction = transaction
+        
+        // Load transaction data
+        isExpensesActive = transaction.type == "EXPENSE"
+        updateToggleUI()
+        
+        tvCategoryHint.text = transaction.category
+        tvCategoryHint.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary))
+        
+        val amountStr = if (transaction.amount % 1 == 0.0) {
+            transaction.amount.toInt().toString()
+        } else {
+            transaction.amount.toString()
+        }
+        etAmount.setText(amountStr)
+        etSource.setText(transaction.source)
+    }
+
+    override fun onHiddenChanged(hidden: Boolean) {
+        super.onHiddenChanged(hidden)
+        if (hidden) {
+            resetInputFields()
         }
     }
 

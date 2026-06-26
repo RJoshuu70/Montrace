@@ -47,12 +47,11 @@ class TransactionAdapter(
 
             ivMore.setOnClickListener { anchor ->
                 val popup = PopupMenu(itemView.context, anchor)
-                popup.menu.add(0, 1, 0, "Edit")
-                popup.menu.add(0, 2, 1, "Delete")
+                popup.menuInflater.inflate(R.menu.menu_transaction_item, popup.menu)
                 popup.setOnMenuItemClickListener { item ->
                     when (item.itemId) {
-                        1 -> onEditClick?.invoke(transaction)
-                        2 -> onDeleteClick?.invoke(transaction)
+                        R.id.menu_edit -> onEditClick?.invoke(transaction)
+                        R.id.menu_delete -> onDeleteClick?.invoke(transaction)
                     }
                     true
                 }

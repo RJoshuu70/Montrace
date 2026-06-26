@@ -102,6 +102,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun editTransaction(transaction: com.example.utsad.data.Transaction) {
+        homeFragment.setEditTransaction(transaction)
+        bottomNavigation.selectedItemId = R.id.nav_home
+    }
+
+    // Untuk click "View All"
+    fun navigateToTransaction() {
+        bottomNavigation.selectedItemId = R.id.nav_transaction
+    }
+
     companion object {
         fun applyStatusBarInset(container: View) {
             ViewCompat.setOnApplyWindowInsetsListener(container) { v, insets ->
