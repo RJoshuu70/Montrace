@@ -264,18 +264,12 @@
                     android:textSize="13sp" />
             </RelativeLayout>
 
-            <!-- Item Transaksi 1 -->
-            <include layout="@layout/item_transaction_home"
-                android:id="@+id/item_transaction_1"
+            <!-- List Transaksi Dinamis -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_recent_transactions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp" />
-
-            <!-- Item Transaksi 2 -->
-            <include layout="@layout/item_transaction_home"
-                android:id="@+id/item_transaction_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:nestedScrollingEnabled="false" />
         </LinearLayout>
 
         <!-- Bottom padding agar tidak tertutup Bottom Nav -->
