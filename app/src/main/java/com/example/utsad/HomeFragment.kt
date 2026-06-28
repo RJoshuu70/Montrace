@@ -265,7 +265,7 @@ class HomeFragment : Fragment() {
     private fun observeTransactions() {
         lifecycleScope.launch {
             database.transactionDao().getTransactionsByUser(currentUserId).collect { list ->
-                transactionAdapter.submitList(list)
+                transactionAdapter.submitList(list.take(3))
             }
         }
     }
