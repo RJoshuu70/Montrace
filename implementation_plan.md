@@ -36,15 +36,15 @@ Proyek ini dibagi menjadi 5 tugas utama agar bisa dikerjakan secara paralel oleh
 2. **Rapolo Joshua** 🔐 _(Sedang Dikerjakan)_
    - **Tugas:** Implementasi Authentication Screen (Fase 2).
    - **Fokus:** Desain XML Sign Up & Log In, logika autentikasi, dan _Session Management_ (SharedPreferences).
-3. **Rafi Fauzi Alfariz**
+3. **Rafi Fauzi Alfariz** 📱 _(Selesai)_
    - **Tugas:** Update Home Screen (Fase 3).
-   - **Fokus:** _Header_ dinamis, _Toggle_ Income/Expense, _Popup_ Kategori, Form Input, dan List _Recent Transaction_.
-4. **Fani Dwi Ariyanti**
+   - **Fokus:** _Header_ dinamis, _Toggle_ Income/Expense, _Popup_ Kategori, Form Input, dan List _Recent Transaction_ (dibatasi 3 item).
+4. **Fani Dwi Ariyanti** 🧾 _(Selesai)_
    - **Tugas:** Update Transaction & Detail Screen (Fase 4).
    - **Fokus:** Menampilkan semua transaksi yang dikelompokkan per tanggal, menu Edit & Delete.
-5. **Damar Kusumawardhani**
+5. **Damar Kusumawardhani** 📊 _(Belum Selesai)_
    - **Tugas:** Update Overview & About Screen (Fase 5 & 6).
-   - **Fokus:** Kalkulasi _Progress Bar_ pemasukan/pengeluaran dan _update_ profil statis Group 5 di About Screen.
+   - **Fokus:** Kalkulasi _Progress Bar_ pemasukan/pengeluaran dan _update_ profil statis Group 5 di About Screen, serta merombak tampilan About dan Transaction.
 
 ## Langkah-Langkah Implementasi Berdasarkan Figma
 
