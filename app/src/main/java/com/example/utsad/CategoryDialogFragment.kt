@@ -57,7 +57,7 @@ class CategoryDialogFragment(
             listOf(
                 Category("Food", R.drawable.ic_cat_food),
                 Category("Public Transit", R.drawable.ic_cat_publictransit),
-                Category("Awards", R.drawable.ic_cat_awards),
+                Category("Shopping", R.drawable.ic_cat_shopping),
                 Category("Education", R.drawable.ic_cat_education),
                 Category("Fuel", R.drawable.ic_cat_fuel),
                 Category("Rent", R.drawable.ic_cat_rent),
