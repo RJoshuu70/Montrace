@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Header: Navy Bar with Centered Title -->
+        <!-- Header: Navy Bar dengan Judul Tengah -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,9 +30,10 @@
                 android:textColor="@color/text_white"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:letterSpacing="0.1" />
+                android:letterSpacing="0.1"/>
         </RelativeLayout>
 
+        <!-- Container dengan Padding Samping agar Posisi Kartu Sejajar Rapi -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,7 +43,7 @@
             android:paddingTop="32dp"
             android:paddingBottom="80dp">
 
-            <!-- Title Section -->
+            <!-- Bagian Judul Kelompok -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -56,85 +57,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Pemrograman Aplikasi"
+                android:text="Pemrograman Aplikasi Bergerak"
                 android:textColor="@color/sys_navy_900"
                 android:textSize="14sp"
-                android:layout_marginTop="4dp" />
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="24dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Bergerak"
-                android:textColor="@color/sys_navy_900"
-                android:textSize="14sp" />
+            <!-- Daftar Card Anggota -->
 
-            <!-- About Card -->
+            <!-- Anggota 1: Joshua -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:background="@drawable/bg_overview_sub_card"
-                android:padding="20dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:background="@drawable/bg_member_card"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"
                 android:gravity="center_vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#D9D9D9">
+
+                    <ImageView
+                        android:id="@+id/iv_member_photo_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/joshua"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Foto Joshua" />
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="About Group 5"
-                        android:textColor="@color/sys_navy_900"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:layout_marginBottom="8dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="UTS Teori dan Praktikum Pemrograman\nAplikasi Bergerak - Kelompok 5 - Kelas A"
-                        android:textColor="@color/sys_navy_900"
-                        android:textSize="11sp"
-                        android:lineSpacingMultiplier="1.2" />
-                </LinearLayout>
-
-                <ImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/ic_users_four"
-                    android:layout_marginStart="16dp" />
-            </LinearLayout>
-
-            <!-- Member List -->
-            <!-- Member 1 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
-
-                <TextView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/bg_member_index"
-                    android:text="1"
-                    android:textColor="@color/text_white"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_marginEnd="16dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -149,33 +111,78 @@
                         android:layout_height="wrap_content"
                         android:text="2410512001"
                         android:textColor="@color/sys_navy_900"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:layout_marginTop="2dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:id="@+id/btn_instagram_1"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_social_button"
+                            android:text="Instagram"
+                            android:textColor="@color/sys_navy_900"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_marginEnd="6dp"
+                            android:clickable="true"
+                            android:focusable="true" />
+
+                        <TextView
+                            android:id="@+id/btn_linkedin_1"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_social_button"
+                            android:text="LinkedIn"
+                            android:textColor="@color/sys_navy_900"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_marginStart="6dp"
+                            android:clickable="true"
+                            android:focusable="true" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Member 2 -->
+            <!-- Anggota 2: Rafi -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+                android:background="@drawable/bg_member_card"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/bg_member_index"
-                    android:text="2"
-                    android:textColor="@color/text_white"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_marginEnd="16dp" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#D9D9D9">
+
+                    <ImageView
+                        android:id="@+id/iv_member_photo_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/rafi"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Foto Rafi" />
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -190,33 +197,78 @@
                         android:layout_height="wrap_content"
                         android:text="2410512015"
                         android:textColor="@color/sys_navy_900"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:layout_marginTop="2dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:id="@+id/btn_instagram_2"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_social_button"
+                            android:text="Instagram"
+                            android:textColor="@color/sys_navy_900"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_marginEnd="6dp"
+                            android:clickable="true"
+                            android:focusable="true" />
+
+                        <TextView
+                            android:id="@+id/btn_linkedin_2"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_social_button"
+                            android:text="LinkedIn"
+                            android:textColor="@color/sys_navy_900"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_marginStart="6dp"
+                            android:clickable="true"
+                            android:focusable="true" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Member 3 -->
+            <!-- Anggota 3: Torikh -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+                android:background="@drawable/bg_member_card"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/bg_member_index"
-                    android:text="3"
-                    android:textColor="@color/text_white"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_marginEnd="16dp" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#D9D9D9">
+
+                    <ImageView
+                        android:id="@+id/iv_member_photo_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/torikh"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Foto Torikh" />
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -231,33 +283,78 @@
                         android:layout_height="wrap_content"
                         android:text="2410512031"
                         android:textColor="@color/sys_navy_900"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:layout_marginTop="2dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:id="@+id/btn_instagram_3"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_social_button"
+                            android:text="Instagram"
+                            android:textColor="@color/sys_navy_900"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_marginEnd="6dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                        <TextView
+                            android:id="@+id/btn_linkedin_3"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_social_button"
+                            android:text="LinkedIn"
+                            android:textColor="@color/sys_navy_900"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_marginStart="6dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Member 4 -->
+            <!-- Anggota 4: Fani -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+                android:background="@drawable/bg_member_card"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/bg_member_index"
-                    android:text="4"
-                    android:textColor="@color/text_white"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_marginEnd="16dp" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#D9D9D9">
+
+                    <ImageView
+                        android:id="@+id/iv_member_photo_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/fani"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Foto Fani"/>
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -272,33 +369,78 @@
                         android:layout_height="wrap_content"
                         android:text="2410512053"
                         android:textColor="@color/sys_navy_900"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:layout_marginTop="2dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:id="@+id/btn_instagram_4"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_social_button"
+                            android:text="Instagram"
+                            android:textColor="@color/sys_navy_900"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_marginEnd="6dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                        <TextView
+                            android:id="@+id/btn_linkedin_4"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_social_button"
+                            android:text="LinkedIn"
+                            android:textColor="@color/sys_navy_900"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_marginStart="6dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Member 5 -->
+            <!-- Anggota 5: Damar -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:layout_marginBottom="20dp">
+                android:background="@drawable/bg_member_card"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"
+                android:gravity="center_vertical">
 
-                <TextView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/bg_member_index"
-                    android:text="5"
-                    android:textColor="@color/text_white"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_marginEnd="16dp" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#D9D9D9">
+
+                    <ImageView
+                        android:id="@+id/iv_member_photo_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/damar"
+                        android:scaleType="centerCrop"
+                        android:contentDescription="Foto Damar" />
+                </androidx.cardview.widget.CardView>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -313,10 +455,45 @@
                         android:layout_height="wrap_content"
                         android:text="2410512069"
                         android:textColor="@color/sys_navy_900"
-                        android:textSize="13sp" />
+                        android:textSize="13sp"
+                        android:layout_marginTop="2dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp">
+
+                        <TextView
+                            android:id="@+id/btn_instagram_5"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_social_button"
+                            android:text="Instagram"
+                            android:textColor="@color/sys_navy_900"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_marginEnd="6dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+
+                        <TextView
+                            android:id="@+id/btn_linkedin_5"
+                            android:layout_width="0dp"
+                            android:layout_height="48dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_social_button"
+                            android:text="LinkedIn"
+                            android:textColor="@color/sys_navy_900"
+                            android:gravity="center"
+                            android:textSize="12sp"
+                            android:layout_marginStart="6dp"
+                            android:clickable="true"
+                            android:focusable="true"/>
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
-</ScrollView>
+</ScrollView>
