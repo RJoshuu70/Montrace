@@ -42,9 +42,9 @@ Proyek ini dibagi menjadi 5 tugas utama agar bisa dikerjakan secara paralel oleh
 4. **Fani Dwi Ariyanti** 🧾 _(Selesai)_
    - **Tugas:** Update Transaction & Detail Screen (Fase 4).
    - **Fokus:** Menampilkan semua transaksi yang dikelompokkan per tanggal, menu Edit & Delete.
-5. **Damar Kusumawardhani** 📊 _(Sedang Dikerjakan - Fungsionalitas Selesai)_
+5. **Damar Kusumawardhani** 📊 _(Selesai)_
    - **Tugas:** Update Overview & About Screen (Fase 5 & 6).
-   - _Fokus:_ Kalkulasi _Progress Bar_ dinamis & Filter Bulan di Overview (Selesai), serta profil Group 5 di About Screen (Selesai). Tersisa rencana merombak tampilan UI About dan Transaction.
+   - _Fokus:_ Kalkulasi _Progress Bar_ dinamis & Filter Bulan di Overview (Selesai), serta profil Group 5 di About Screen (Selesai).
 
 ## Langkah-Langkah Implementasi Berdasarkan Figma
 
