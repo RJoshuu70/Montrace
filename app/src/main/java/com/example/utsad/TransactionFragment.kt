@@ -43,6 +43,9 @@ class TransactionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         rvTransactions = view.findViewById(R.id.rv_transactions)
+        val tvDateTrx = view.findViewById<TextView>(R.id.tv_date_transaction)
+        val dateFormat = SimpleDateFormat("dd MMMM\nyyyy", Locale.forLanguageTag("id-ID"))
+        tvDateTrx.text = dateFormat.format(Date())
         tvFilterMonth = view.findViewById(R.id.tv_filter_month)
         btnFilterMonth = view.findViewById(R.id.btn_filter_month)
         tvNoData = view.findViewById(R.id.tv_no_data)

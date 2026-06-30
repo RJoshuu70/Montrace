@@ -22,6 +22,10 @@ class AboutFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val tvDateAbout = view.findViewById<TextView>(R.id.tv_date_about)
+        val dateFormat = java.text.SimpleDateFormat("dd MMMM\nyyyy", java.util.Locale.forLanguageTag("id-ID"))
+        tvDateAbout.text = dateFormat.format(java.util.Date())
+
         //Setup Instagram Buttons
         view.findViewById<TextView>(R.id.btn_instagram_1).setOnClickListener {
             openUrl("https://www.instagram.com/rjoshn")

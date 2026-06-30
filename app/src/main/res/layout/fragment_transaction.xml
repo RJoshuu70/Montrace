@@ -7,16 +7,29 @@
     android:orientation="vertical"
     android:background="@color/bg_cream">
 
-    <!-- Header: Navy Bar with Centered Title -->
+    <!-- Header: Logo + Tanggal -->
     <RelativeLayout
+        android:id="@+id/layout_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/sys_navy_500"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
         android:paddingTop="20dp"
-        android:paddingBottom="24dp">
+        android:paddingBottom="20dp">
 
+        <!-- Logo -->
+        <ImageView
+            android:id="@+id/iv_profile_placeholder"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/logo_notext"
+            android:contentDescription="Logo Aplikasi"
+            android:scaleType="fitCenter" />
+
+        <!-- Nama Halaman (Tengah) -->
         <TextView
             android:id="@+id/tv_title_transaction"
             android:layout_width="wrap_content"
@@ -24,9 +37,23 @@
             android:layout_centerInParent="true"
             android:text="TRANSACTION"
             android:textColor="@color/text_white"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             android:letterSpacing="0.1" />
+
+        <!-- Tanggal -->
+        <TextView
+            android:id="@+id/tv_date_transaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text="30 Juni\n2026"
+            android:textColor="@color/text_white"
+            android:textSize="14sp"
+            android:gravity="end"
+            android:textStyle="bold"
+            android:lineSpacingMultiplier="1.2" />
     </RelativeLayout>
 
     <!-- Filters Section -->
