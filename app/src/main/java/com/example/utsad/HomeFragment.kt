@@ -15,8 +15,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.utsad.data.AppDatabase
+import com.example.utsad.data.SessionManager
 import com.example.utsad.data.Transaction
-import com.example.utsad.data.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
@@ -43,7 +43,7 @@ class HomeFragment : Fragment() {
     private lateinit var transactionAdapter: TransactionAdapter
     private lateinit var database: AppDatabase
 
-    private val currentUserId = 1 // Dummy User ID
+    private val currentUserId: Int by lazy { SessionManager(requireContext()).getUserId() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -80,12 +80,9 @@ class HomeFragment : Fragment() {
         setupRecyclerView()
         setupSaveButton()
 
-        // Init dummy user and observe database
-        lifecycleScope.launch {
-            initDummyUser()
-            observeTransactions()
-            observeTotalAmount()
-        }
+        // Observe database untuk user yang sedang login
+        observeTransactions()
+        observeTotalAmount()
     }
 
     private fun setupHeader() {
@@ -249,16 +246,6 @@ class HomeFragment : Fragment() {
         super.onHiddenChanged(hidden)
         if (hidden) {
             resetInputFields()
-        }
-    }
-
-    private suspend fun initDummyUser() {
-        withContext(Dispatchers.IO) {
-            val dummyEmail = "dummy@montrace.com"
-            val user = database.userDao().getUserByEmail(dummyEmail)
-            if (user == null) {
-                database.userDao().insertUser(User(id = currentUserId, name = "Dummy User", email = dummyEmail, password = "password"))
-            }
         }
     }
 

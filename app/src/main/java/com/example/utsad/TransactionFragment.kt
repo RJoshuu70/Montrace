@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.utsad.data.AppDatabase
+import com.example.utsad.data.SessionManager
 import com.example.utsad.data.Transaction
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
@@ -27,7 +28,7 @@ class TransactionFragment : Fragment() {
     private lateinit var btnFilterMonth: View
     private lateinit var tvNoData: TextView
 
-    private val currentUserId = 1 // Dummy user ID matching HomeFragment
+    private val currentUserId: Int by lazy { SessionManager(requireContext()).getUserId() }
     
     private var allTransactions: List<Transaction> = emptyList()
     private var selectedMonthYear: String = SimpleDateFormat("MMMM yyyy", Locale("id", "ID")).format(Date())

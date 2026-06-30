@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.utsad.data.AppDatabase
+import com.example.utsad.data.SessionManager
 import com.example.utsad.data.Transaction
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
@@ -21,7 +22,7 @@ import java.util.Locale
 class OverviewFragment : Fragment() {
 
     private lateinit var database: AppDatabase
-    private val currentUserId = 1
+    private val currentUserId: Int by lazy { SessionManager(requireContext()).getUserId() }
 
     private lateinit var tvOverviewTotal: TextView
     private lateinit var tvOverviewIncome: TextView
