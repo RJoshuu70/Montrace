@@ -522,5 +522,22 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
+        <!-- Tombol Logout -->
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
+            android:text="Logout"
+            android:textColor="@color/text_white"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:backgroundTint="@color/sys_navy_500"
+            android:stateListAnimator="@null" />
+
     </LinearLayout>
 </ScrollView>
