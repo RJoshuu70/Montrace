@@ -31,6 +31,10 @@ class TransactionDetailActivity : AppCompatActivity() {
         // Handle Back Navigation
         ivBack.setOnClickListener { finish() }
 
+        val tvDateDetail = findViewById<TextView>(R.id.tv_date_detail)
+        val dateFormat = java.text.SimpleDateFormat("dd MMMM\nyyyy", java.util.Locale.forLanguageTag("id-ID"))
+        tvDateDetail.text = dateFormat.format(java.util.Date())
+
         // Get Intent Data
         intent?.let {
             val category = it.getStringExtra("CATEGORY")

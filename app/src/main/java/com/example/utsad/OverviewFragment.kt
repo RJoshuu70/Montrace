@@ -55,6 +55,10 @@ class OverviewFragment : Fragment() {
         tvFilterMonth = view.findViewById(R.id.tv_filter_month_ov)
         btnFilterMonth = view.findViewById(R.id.btn_filter_month_ov)
 
+        val tvDateOverview = view.findViewById<TextView>(R.id.tv_date_overview)
+        val dateFormat = SimpleDateFormat("dd MMMM\nyyyy", Locale.forLanguageTag("id-ID"))
+        tvDateOverview.text = dateFormat.format(Date())
+
         //Hubungkan ke Database
         database = AppDatabase.getDatabase(requireContext())
 
