@@ -50,15 +50,19 @@
 
                 <!-- Filter bulan -->
                 <RelativeLayout
+                    android:id="@+id/btn_filter_month_ov"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/bg_filter_chip"
                     android:paddingStart="12dp"
-                    android:paddingEnd="12dp">
+                    android:paddingEnd="12dp"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <TextView
+                        android:id="@+id/tv_filter_month_ov"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
@@ -230,129 +234,12 @@
                 android:letterSpacing="0.05"
                 android:layout_marginBottom="12dp" />
 
-            <!-- Awards card -->
             <LinearLayout
+                android:id="@+id/container_income_breakdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:background="@drawable/bg_category_card"
-                android:padding="14dp"
-                android:layout_marginBottom="10dp">
-
-                <!-- Dot + Name row -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="8dp">
-
-                    <View
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:background="@drawable/bg_circle_income"
-                        android:layout_marginEnd="8dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Awards"
-                        android:textColor="@color/text_primary"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <!-- Progress bar + percentage row -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ProgressBar
-                        android:id="@+id/progress_awards"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="12dp"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/tv_pct_awards"
-                        android:layout_marginEnd="12dp"
-                        android:progress="56"
-                        android:max="100"
-                        android:progressTint="@color/chart_awards"
-                        android:progressBackgroundTint="@color/divider" />
-
-                    <TextView
-                        android:id="@+id/tv_pct_awards"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:text="55.56%"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <!-- Salary card -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/bg_category_card"
-                android:padding="14dp"
-                android:layout_marginBottom="24dp">
-
-                <!-- Dot + Name row -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="8dp">
-
-                    <View
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:background="@drawable/bg_circle_income"
-                        android:layout_marginEnd="8dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Salary"
-                        android:textColor="@color/text_primary"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <!-- Progress bar + percentage row -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ProgressBar
-                        android:id="@+id/progress_salary"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="12dp"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/tv_pct_salary"
-                        android:layout_marginEnd="12dp"
-                        android:progress="44"
-                        android:max="100"
-                        android:progressTint="@color/chart_salary"
-                        android:progressBackgroundTint="@color/divider" />
-
-                    <TextView
-                        android:id="@+id/tv_pct_salary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:text="44.44%"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </LinearLayout>
+                android:layout_marginBottom="24dp" />
 
             <!-- ==================== EXPENSES BREAKDOWN ==================== -->
             <TextView
@@ -365,129 +252,11 @@
                 android:letterSpacing="0.05"
                 android:layout_marginBottom="12dp" />
 
-            <!-- Food card -->
             <LinearLayout
+                android:id="@+id/container_expense_breakdown"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/bg_category_card"
-                android:padding="14dp"
-                android:layout_marginBottom="10dp">
-
-                <!-- Dot + Name row -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="8dp">
-
-                    <View
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:background="@drawable/bg_circle_expense"
-                        android:layout_marginEnd="8dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Food"
-                        android:textColor="@color/text_primary"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <!-- Progress bar + percentage row -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ProgressBar
-                        android:id="@+id/progress_food"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="12dp"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/tv_pct_food"
-                        android:layout_marginEnd="12dp"
-                        android:progress="88"
-                        android:max="100"
-                        android:progressTint="@color/chart_food"
-                        android:progressBackgroundTint="@color/divider" />
-
-                    <TextView
-                        android:id="@+id/tv_pct_food"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:text="87.50%"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </LinearLayout>
-
-            <!-- Transportation card -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/bg_category_card"
-                android:padding="14dp"
-                android:layout_marginBottom="10dp">
-
-                <!-- Dot + Name row -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="8dp">
-
-                    <View
-                        android:layout_width="10dp"
-                        android:layout_height="10dp"
-                        android:background="@drawable/bg_circle_expense"
-                        android:layout_marginEnd="8dp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Transportation"
-                        android:textColor="@color/text_primary"
-                        android:textSize="14sp" />
-                </LinearLayout>
-
-                <!-- Progress bar + percentage row -->
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ProgressBar
-                        android:id="@+id/progress_transport"
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="12dp"
-                        android:layout_centerVertical="true"
-                        android:layout_toStartOf="@+id/tv_pct_transport"
-                        android:layout_marginEnd="12dp"
-                        android:progress="13"
-                        android:max="100"
-                        android:progressTint="@color/chart_transport"
-                        android:progressBackgroundTint="@color/divider" />
-
-                    <TextView
-                        android:id="@+id/tv_pct_transport"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:text="12.50%"
-                        android:textColor="@color/text_primary"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-            </LinearLayout>
+                android:orientation="vertical" />
 
         </LinearLayout>
     </LinearLayout>

@@ -6,13 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.utsad.data.AppDatabase
 import com.example.utsad.data.Transaction
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class OverviewFragment : Fragment() {
@@ -24,15 +27,13 @@ class OverviewFragment : Fragment() {
     private lateinit var tvOverviewIncome: TextView
     private lateinit var tvOverviewExpense: TextView
 
-    private lateinit var progressAwards: ProgressBar
-    private lateinit var tvPctAwards: TextView
-    private lateinit var progressSalary: ProgressBar
-    private lateinit var tvPctSalary: TextView
+    private lateinit var containerIncomeBreakdown: ViewGroup
+    private lateinit var containerExpenseBreakdown: ViewGroup
+    private lateinit var tvFilterMonth: TextView
+    private lateinit var btnFilterMonth: View
 
-    private lateinit var progressFood: ProgressBar
-    private lateinit var tvPctFood: TextView
-    private lateinit var progressTransport: ProgressBar
-    private lateinit var tvPctTransport: TextView
+    private var allTransactions: List<Transaction> = emptyList()
+    private var selectedMonthYear: String = SimpleDateFormat("MMMM yyyy", Locale("id", "ID")).format(Date())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,55 +50,97 @@ class OverviewFragment : Fragment() {
         tvOverviewIncome = view.findViewById(R.id.tv_overview_income)
         tvOverviewExpense = view.findViewById(R.id.tv_overview_expense)
 
-        progressAwards = view.findViewById(R.id.progress_awards)
-        tvPctAwards = view.findViewById(R.id.tv_pct_awards)
-        progressSalary = view.findViewById(R.id.progress_salary)
-        tvPctSalary = view.findViewById(R.id.tv_pct_salary)
-
-        progressFood = view.findViewById(R.id.progress_food)
-        tvPctFood = view.findViewById(R.id.tv_pct_food)
-        progressTransport = view.findViewById(R.id.progress_transport)
-        tvPctTransport = view.findViewById(R.id.tv_pct_transport)
+        containerIncomeBreakdown = view.findViewById(R.id.container_income_breakdown)
+        containerExpenseBreakdown = view.findViewById(R.id.container_expense_breakdown)
+        tvFilterMonth = view.findViewById(R.id.tv_filter_month_ov)
+        btnFilterMonth = view.findViewById(R.id.btn_filter_month_ov)
 
         //Hubungkan ke Database
         database = AppDatabase.getDatabase(requireContext())
 
+        setupMonthFilter()
         observeOverviewData()
+    }
+
+    private fun setupMonthFilter() {
+        tvFilterMonth.text = selectedMonthYear
+        btnFilterMonth.setOnClickListener {
+            val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_month_year, null)
+            val pickerMonth = dialogView.findViewById<android.widget.NumberPicker>(R.id.picker_month)
+            val pickerYear = dialogView.findViewById<android.widget.NumberPicker>(R.id.picker_year)
+
+            val calendar = Calendar.getInstance()
+            try {
+                if (selectedMonthYear != "All") {
+                    val sdf = SimpleDateFormat("MMMM yyyy", Locale("id", "ID"))
+                    val date = sdf.parse(selectedMonthYear)
+                    if (date != null) {
+                        calendar.time = date
+                    }
+                }
+            } catch (e: Exception) {
+                // ignore
+            }
+
+            val months = arrayOf("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember")
+            pickerMonth.minValue = 0
+            pickerMonth.maxValue = 11
+            pickerMonth.displayedValues = months
+            pickerMonth.value = calendar.get(Calendar.MONTH)
+
+            val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+            pickerYear.minValue = currentYear - 10
+            pickerYear.maxValue = currentYear + 10
+            pickerYear.value = calendar.get(Calendar.YEAR)
+
+            androidx.appcompat.app.AlertDialog.Builder(requireContext())
+                .setTitle("Pilih Bulan")
+                .setView(dialogView)
+                .setPositiveButton("OK") { _, _ ->
+                    val selectedCalendar = Calendar.getInstance()
+                    selectedCalendar.set(Calendar.YEAR, pickerYear.value)
+                    selectedCalendar.set(Calendar.MONTH, pickerMonth.value)
+                    val monthFormat = SimpleDateFormat("MMMM yyyy", Locale("id", "ID"))
+                    selectedMonthYear = monthFormat.format(selectedCalendar.time)
+                    tvFilterMonth.text = selectedMonthYear
+                    filterAndDisplayData()
+                }
+                .setNegativeButton("Batal", null)
+                .show()
+        }
     }
 
     private fun observeOverviewData() {
         lifecycleScope.launch {
-            database.transactionDao().getTransactionsByUser(currentUserId).collect {
-                transactions ->
-                calculateAndPopulateUI(transactions)
+            database.transactionDao().getTransactionsByUser(currentUserId).collect { transactions ->
+                allTransactions = transactions
+                filterAndDisplayData()
             }
         }
     }
 
-    private fun calculateAndPopulateUI(transactions: List<Transaction>) {
+    private fun filterAndDisplayData() {
+        val filteredList = if (selectedMonthYear == "All") {
+            allTransactions
+        } else {
+            val monthFormat = SimpleDateFormat("MMMM yyyy", Locale("id", "ID"))
+            allTransactions.filter { 
+                monthFormat.format(Date(it.date)) == selectedMonthYear 
+            }
+        }
+
         var totalIncome = 0.0
         var totalExpense = 0.0
+        val incomeByCategory = mutableMapOf<String, Double>()
+        val expenseByCategory = mutableMapOf<String, Double>()
 
-        var incomeAwards = 0.0
-        var incomeSalary = 0.0
-
-        var expenseFood = 0.0
-        var expenseTransport = 0.0
-
-        for (transaction in transactions) {
+        for (transaction in filteredList) {
             if (transaction.type == "INCOME") {
                 totalIncome += transaction.amount
-                when (transaction.category) {
-                    "Awards" -> incomeAwards += transaction.amount
-                    "Salary" -> incomeSalary += transaction.amount
-                }
+                incomeByCategory[transaction.category] = (incomeByCategory[transaction.category] ?: 0.0) + transaction.amount
             } else if (transaction.type == "EXPENSE") {
                 totalExpense += transaction.amount
-                when (transaction.category) {
-                    "Food" -> expenseFood += transaction.amount
-                    // Menoleransi input kategori "Public Transit" dari dialog kategori maupun "Transportation"
-                    "Public Transit", "Transportation" -> expenseTransport += transaction.amount
-                }
+                expenseByCategory[transaction.category] = (expenseByCategory[transaction.category] ?: 0.0) + transaction.amount
             }
         }
 
@@ -109,24 +152,56 @@ class OverviewFragment : Fragment() {
         tvOverviewIncome.text = format.format(totalIncome)
         tvOverviewExpense.text = format.format(totalExpense)
 
-        //Hitung persentase Kategori Pemasukan (Income)
-        val awardsPct = if (totalIncome > 0) (incomeAwards / totalIncome) * 100 else 0.0
-        var salaryPct = if (totalIncome > 0) (incomeSalary / totalIncome) * 100 else 0.0
+        // Clear containers
+        containerIncomeBreakdown.removeAllViews()
+        containerExpenseBreakdown.removeAllViews()
 
-        //Hitung persentase Kategori Pengeluaran (Expense)
-        val foodPct = if (totalExpense > 0) (expenseFood / totalExpense) * 100 else 0.0
-        val transportPct = if (totalExpense > 0) (expenseTransport / totalExpense) * 100 else 0.0
+        val inflater = LayoutInflater.from(requireContext())
 
-        //Set Nilai Progress Bar
-        progressAwards.progress = awardsPct.toInt()
-        progressSalary.progress = salaryPct.toInt()
-        progressFood.progress = foodPct.toInt()
-        progressTransport.progress = transportPct.toInt()
+        // Populate Income breakdown dynamically (only used categories, sorted by amount descending)
+        for ((category, amount) in incomeByCategory.entries.sortedByDescending { it.value }) {
+            val pct = if (totalIncome > 0) (amount / totalIncome) * 100 else 0.0
+            val itemView = inflater.inflate(R.layout.item_category_breakdown, containerIncomeBreakdown, false)
 
-        //Tampilkan Teks Persentase dengan format 2 angka di belakang koma
-        tvPctAwards.text = String.format(Locale.US, "%.2f%%", awardsPct)
-        tvPctSalary.text = String.format(Locale.US, "%.2f%%", salaryPct)
-        tvPctFood.text = String.format(Locale.US, "%.2f%%", foodPct)
-        tvPctTransport.text = String.format(Locale.US, "%.2f%%", transportPct)
+            val vCircleColor = itemView.findViewById<View>(R.id.v_circle_color)
+            vCircleColor.setBackgroundResource(R.drawable.bg_circle_income)
+
+            val tvCategoryName = itemView.findViewById<TextView>(R.id.tv_category_name)
+            tvCategoryName.text = category
+
+            val pbCategory = itemView.findViewById<ProgressBar>(R.id.pb_category)
+            pbCategory.progress = pct.toInt()
+            pbCategory.progressTintList = android.content.res.ColorStateList.valueOf(
+                ContextCompat.getColor(requireContext(), R.color.income_green)
+            )
+
+            val tvPctCategory = itemView.findViewById<TextView>(R.id.tv_pct_category)
+            tvPctCategory.text = String.format(Locale.US, "%.2f%%", pct)
+
+            containerIncomeBreakdown.addView(itemView)
+        }
+
+        // Populate Expense breakdown dynamically (only used categories, sorted by amount descending)
+        for ((category, amount) in expenseByCategory.entries.sortedByDescending { it.value }) {
+            val pct = if (totalExpense > 0) (amount / totalExpense) * 100 else 0.0
+            val itemView = inflater.inflate(R.layout.item_category_breakdown, containerExpenseBreakdown, false)
+
+            val vCircleColor = itemView.findViewById<View>(R.id.v_circle_color)
+            vCircleColor.setBackgroundResource(R.drawable.bg_circle_expense)
+
+            val tvCategoryName = itemView.findViewById<TextView>(R.id.tv_category_name)
+            tvCategoryName.text = category
+
+            val pbCategory = itemView.findViewById<ProgressBar>(R.id.pb_category)
+            pbCategory.progress = pct.toInt()
+            pbCategory.progressTintList = android.content.res.ColorStateList.valueOf(
+                ContextCompat.getColor(requireContext(), R.color.expense_red)
+            )
+
+            val tvPctCategory = itemView.findViewById<TextView>(R.id.tv_pct_category)
+            tvPctCategory.text = String.format(Locale.US, "%.2f%%", pct)
+
+            containerExpenseBreakdown.addView(itemView)
+        }
     }
 }
