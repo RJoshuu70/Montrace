@@ -26,8 +26,8 @@ import kotlinx.coroutines.withContext
  *    dengan OnConflictStrategy.IGNORE oleh Torikh di Fase 1.
  * 3. Karena IGNORE, insert ke email yang sudah terdaftar tidak melempar exception,
  *    melainkan mengembalikan -1L. Kondisi inilah yang kita pakai untuk mendeteksi duplikat.
- * 4. Jika sukses (id != -1) → langsung auto-login (simpan sesi) lalu ke MainActivity,
- *    konsisten dengan pola Splash→Onboarding yang juga auto-skip layar yang sudah dilalui.
+ * 4. Jika sukses (id != -1) → arahkan ke LoginActivity agar user login secara eksplisit.
+ *    Ini memastikan alur auth yang jelas: Signup → Login → Home.
  */
 class SignupActivity : AppCompatActivity() {
 
@@ -95,8 +95,8 @@ class SignupActivity : AppCompatActivity() {
                 return@launch
             }
 
-            sessionManager.saveSession(userId = newUserId.toInt(), name = name, email = email)
-            navigateToMain()
+            // Akun berhasil dibuat, arahkan ke Login
+            navigateToLogin()
         }
     }
 
@@ -121,8 +121,8 @@ class SignupActivity : AppCompatActivity() {
         if (isLoading) tvError.visibility = View.GONE
     }
 
-    private fun navigateToMain() {
-        val intent = Intent(this, MainActivity::class.java).apply {
+    private fun navigateToLogin() {
+        val intent = Intent(this, LoginActivity::class.java).apply {
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
         startActivity(intent)
