@@ -40,7 +40,7 @@ class HomeFragment : Fragment() {
     private lateinit var tvTotalAmount: TextView
     private lateinit var rvRecentTransactions: RecyclerView
 
-    private lateinit var transactionAdapter: TransactionAdapter
+    private lateinit var transactionAdapter: TransactionListAdapter
     private lateinit var database: AppDatabase
 
     private val currentUserId: Int by lazy { SessionManager(requireContext()).getUserId() }
@@ -134,7 +134,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupRecyclerView() {
-        transactionAdapter = TransactionAdapter(
+        transactionAdapter = TransactionListAdapter(
             onEditClick = { transaction ->
                 (activity as? MainActivity)?.editTransaction(transaction)
             },
@@ -252,7 +252,8 @@ class HomeFragment : Fragment() {
     private fun observeTransactions() {
         lifecycleScope.launch {
             database.transactionDao().getTransactionsByUser(currentUserId).collect { list ->
-                transactionAdapter.submitList(list.take(3))
+                val listItems = list.take(3).map { TransactionListItem.Item(it) }
+                transactionAdapter.submitList(listItems)
             }
         }
     }
