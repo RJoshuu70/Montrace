@@ -33,7 +33,7 @@ Proyek ini dibagi menjadi 5 tugas utama agar bisa dikerjakan secara paralel oleh
    - **Tugas:** Setup Room Database & DAO (Fase 1).
    - _Fokus:_ Membuat fondasi database agar bisa dipakai oleh anggota lain, serta penyesuaian kategori pengeluaran (Shopping).
 
-2. **Rapolo Joshua** 🔐 _(Sedang Dikerjakan)_
+2. **Rapolo Joshua** 🔐 _(Selesai)_
    - **Tugas:** Implementasi Authentication Screen (Fase 2).
    - **Fokus:** Desain XML Sign Up & Log In, logika autentikasi, dan _Session Management_ (SharedPreferences).
 3. **Rafi Fauzi Alfariz** 📱 _(Selesai)_
