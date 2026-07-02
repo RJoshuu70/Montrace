@@ -68,7 +68,7 @@
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             android:paddingTop="32dp"
-            android:paddingBottom="80dp">
+            android:paddingBottom="16dp">
 
             <!-- Bagian Judul Kelompok -->
             <TextView
